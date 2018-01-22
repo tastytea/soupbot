@@ -50,7 +50,6 @@
         "sugar",
         "soy sauce",
         "chilli peppers",
-        "chives",
         "basil",
         "marjoram",
         "rosemary",
@@ -59,8 +58,7 @@
         "allspice",
         "cumin",
         "curcuma",
-        "coriander",
-        "parsley"
+        "coriander"
     ],
     "fruits":
     [
@@ -76,7 +74,10 @@
         "strawberries",
         "blackberries",
         "blueberries",
-        "raspberries"
+        "raspberries",
+        "peanuts",
+        "walnuts",
+        "almonds"
     ],
     "misc":
     [
@@ -90,6 +91,8 @@
     "highprio":
     [
         "garlic",
-        "onions"
+        "onions",
+        "chives",
+        "parsley"
     ]
 }
