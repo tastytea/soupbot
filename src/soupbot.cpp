@@ -127,7 +127,11 @@ int main(int argc, char *argv[])
     toot += "1 part " + get_ingredient(vegetables);
     if (dice() > 0)
         toot += ",\n1 part " + get_ingredient(vegetables);
+    if (dice() > 0)
+        toot += ",\n1 part " + get_ingredient(vegetables);
     if (dice() > 1)
+        toot += ",\n1 part " + get_ingredient(vegetables);
+    if (dice() > 2)
         toot += ",\n1 part " + get_ingredient(vegetables);
 
     if (dice() > 1)

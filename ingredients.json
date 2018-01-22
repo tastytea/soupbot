@@ -33,7 +33,8 @@
         "mangel",
         "turnip",
         "maize",
-        "sweet potatoes"
+        "sweet potatoes",
+        "pumpkin"
     ],
     "spices":
     [
@@ -58,7 +59,8 @@
         "allspice",
         "cumin",
         "curcuma",
-        "coriander"
+        "coriander",
+        "parsley"
     ],
     "fruits":
     [
