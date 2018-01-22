@@ -1,0 +1,94 @@
+{
+    "vegetables":
+    [
+        "potatoes",
+        "brussel sprouts",
+        "broccoli",
+        "kidney beans",
+        "white beans",
+        "chick peas",
+        "carrots",
+        "white cabbage",
+        "kale",
+        "savoy cabbage",
+        "green beans",
+        "paprikas",
+        "cauliflowers",
+        "tomatoes",
+        "gherkins",
+        "eggplants",
+        "courgettes",
+        "chinese cabbage",
+        "green peas",
+        "yellow peas",
+        "brown lentils",
+        "red lentils",
+        "yellow lentils",
+        "black lentils",
+        "sugar peas",
+        "black-eyed peas",
+        "pinto beans",
+        "spinach",
+        "asparagus",
+        "mangel",
+        "turnip",
+        "maize",
+        "sweet potatoes"
+
+    ],
+    "spices":
+    [
+        "thyme",
+        "pepper",
+        "oregano",
+        "cinnamon",
+        "curry powder",
+        "paprika powder",
+        "caraway seeds",
+        "vanilla",
+        "mustard",
+        "sugar",
+        "soy sauce",
+        "chilli peppers",
+        "chives",
+        "basil",
+        "marjoram",
+        "rosemary",
+        "savory",
+        "nutmeg",
+        "allspice",
+        "cumin",
+        "curcuma",
+        "coriander"
+    ],
+    "fruits":
+    [
+        "apples",
+        "bananas",
+        "pineapples",
+        "cherries",
+        "grapes",
+        "lemons",
+        "limes",
+        "plums",
+        "peaches",
+        "strawberries",
+        "blackberries",
+        "blueberries",
+        "raspberries"
+    ],
+    "misc":
+    [
+        "smoked tofu",
+        "mushrooms",
+        "chanterelles",
+        "croutons",
+        "noodles",
+        "bamboo sprouts"
+    ],
+    "highprio":
+    [
+        "garlic",
+        "onions"
+    ]
+}
