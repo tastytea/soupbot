@@ -18,14 +18,13 @@
 #include <vector>
 #include <string>
 #include <cstdint>
-#include <sstream>
 #include <cstdlib>
+#include <random>
+#include <chrono>
 #include <mastodon-cpp.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/filesystem.hpp>
-#include <random>
-#include <chrono>
 #include "version.hpp"
 
 namespace pt = boost::property_tree;
@@ -81,6 +80,21 @@ void populate_vector(const pt::ptree &ingredients, const string &node, std::vect
     }
 }
 
+string get_ingredient(std::vector<string> &vector)
+{
+    if (vector.size() == 0)
+        return "nothing";
+
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::default_random_engine generator(seed);
+    std::uniform_int_distribution<std::uint16_t> distribution(0, vector.size() - 1);
+    const std::uint16_t i = distribution(generator);
+    const string ingredient = vector.at(i);
+
+    vector.erase(vector.begin() + i);
+    return ingredient;
+}
+
 int main(int argc, char *argv[])
 {
     pt::ptree config;
@@ -106,54 +120,62 @@ int main(int argc, char *argv[])
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
     std::default_random_engine generator(seed);
     std::uniform_int_distribution<std::uint8_t> distribution(0, 3);
-    std::uniform_int_distribution<std::uint16_t> distribution_vegetables(0, vegetables.size() - 1);
-    std::uniform_int_distribution<std::uint16_t> distribution_spices(0, spices.size() - 1);
-    std::uniform_int_distribution<std::uint16_t> distribution_fruits(0, fruits.size() - 1);
-    std::uniform_int_distribution<std::uint16_t> distribution_misc(0, misc.size() - 1);
-    std::uniform_int_distribution<std::uint16_t> distribution_highprio(0, highprio.size() - 1);
-
     auto dice = std::bind(distribution, generator);
-    auto vegdice = std::bind(distribution_vegetables, generator);
-    auto spicedice = std::bind(distribution_spices, generator);
-    auto fruitdice = std::bind(distribution_fruits, generator);
-    auto miscdice = std::bind(distribution_misc, generator);
-    auto priodice = std::bind(distribution_highprio, generator);
 
     string toot = "Todays #soup is made of:\n\n";
 
-    toot += "1 part " + vegetables[vegdice()];
+    toot += "1 part " + get_ingredient(vegetables);
     if (dice() > 0)
-        toot += ",\n1 part " + vegetables[vegdice()];
+        toot += ",\n1 part " + get_ingredient(vegetables);
     if (dice() > 1)
-        toot += ",\n1 part " + vegetables[vegdice()];
+        toot += ",\n1 part " + get_ingredient(vegetables);
 
     if (dice() > 1)
-        toot += ",\na few " + fruits[fruitdice()];
+        toot += ",\na few " + get_ingredient(fruits);
 
     if (dice() > 1)
-        toot += ",\na good handful " + misc[miscdice()];
+        toot += ",\na good handful " + get_ingredient(misc);
     if (dice() > 1)
-        toot += ",\na good handful " + misc[miscdice()];
+        toot += ",\na good handful " + get_ingredient(misc);
 
-    toot += ",\n" + spices[spicedice()];
+    toot += ",\n" + get_ingredient(spices);
     if (dice() > 0)
-        toot += ",\n" + spices[spicedice()];
+        toot += ",\n" + get_ingredient(spices);
     if (dice() > 1)
-        toot += ",\n" + spices[spicedice()];
-
-    toot += ",\nan ample amount of " + highprio[priodice()];
+        toot += ",\n" + get_ingredient(spices);
     if (dice() > 1)
-        toot += " and " + highprio[priodice()];
+        toot += ",\n" + get_ingredient(spices);
+    if (dice() > 2)
+        toot += ",\n" + get_ingredient(spices);
 
-    toot += "\nand plenty oil.\n\n#bot";
+    toot += ",\nan ample amount of " + get_ingredient(highprio);
+    if (dice() > 1)
+        toot += " and " + get_ingredient(highprio);
 
-    cout << toot << '\n';
+    toot += ",\nand plenty oil.\n\nHappy cooking! 🍲\n\n#bot";
 
 
-    // string answer;
-    // std::uint16_t ret;
-    // Mastodon::API masto(instance, access_token);
-    // masto.set_useragent("soupbot/" + (string)global::version);
+    string answer;
+    std::uint16_t ret;
+    Mastodon::API masto(instance, access_token);
+    masto.set_useragent("soupbot/" + (string)global::version);
+
+    API::parametermap parameters =
+    {
+        { "status", { toot } },
+        { "visibility", { "public" } }
+    };
+    ret = masto.post(API::v1::statuses, parameters, answer);
+
+    if (ret == 0)
+    {
+        cout << answer << '\n';
+    }
+    else
+    {
+        std::cerr << "Error code: " << ret << '\n';
+        return ret;
+    }
 
     return 0;
 }

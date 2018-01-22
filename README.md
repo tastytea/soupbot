@@ -1,4 +1,4 @@
-**soupbot** is a soup-recommending bot.
+**soupbot** is a soup-recommending bot for Mastodon.
 
 # Install
 
@@ -11,10 +11,6 @@
  * [mastodon-cpp](https://github.com/tastytea/mastodon-cpp) (at least: 0.1.4)
 
 ## Get sourcecode
-
-### Release
-
-Download the current release at [GitHub](https://github.com/tastytea/soupbot/releases).
 
 ### Development version
 
@@ -36,6 +32,8 @@ Install with `make install`.
 # Usage
 
 Copy `ingredients.json` to `~/.config/soupbot/ingredients.json`.
+
+You will need a pre-generated authentication code.
 
 ## Error codes
 
