@@ -100,16 +100,25 @@ int main(int argc, char *argv[])
     pt::ptree config;
     string instance = "";
     string access_token = "";
-
-    read_config(config, instance, access_token);
-
     pt::ptree ingredients;
-    pt::read_json(filepath + "ingredients.json", ingredients);
     std::vector<string> vegetables;
     std::vector<string> spices;
     std::vector<string> fruits;
     std::vector<string> misc;
     std::vector<string> highprio;
+
+    read_config(config, instance, access_token);
+
+    try
+    {
+        pt::read_json(filepath + "ingredients.json", ingredients);
+    }
+    catch (std::exception &e)
+    {
+        // most likely file not found
+        std::cerr << "ERROR: " << filepath << "ingredients.json not found or not readable.\n";
+        return 32;
+    }
 
     populate_vector(ingredients, "vegetables", vegetables);
     populate_vector(ingredients, "spices", spices);

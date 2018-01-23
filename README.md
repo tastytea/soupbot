@@ -45,6 +45,7 @@ You will need a pre-generated authentication code.
 |        16 | Connection failed             |
 |        17 | TLS error                     |
 |        18 | Invalid response from server  |
+|        32 | File not readable             |
 | 100 - 999 | HTTP status codes             |
 |     65535 | Unknown exception             |
 
