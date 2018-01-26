@@ -34,7 +34,9 @@
         "turnip",
         "maize",
         "sweet potatoes",
-        "pumpkin"
+        "pumpkin",
+        "radishes",
+        "spinach"
     ],
     "spices":
     [
@@ -58,7 +60,8 @@
         "allspice",
         "cumin",
         "curcuma",
-        "coriander"
+        "coriander",
+        "wasabi"
     ],
     "fruits":
     [
