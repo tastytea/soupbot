@@ -135,37 +135,37 @@ int main(int argc, char *argv[])
 
     toot += "1 part " + get_ingredient(vegetables);
     if (dice() > 0)
-        toot += ",\n1 part " + get_ingredient(vegetables);
+        toot += ", \n1 part " + get_ingredient(vegetables);
     if (dice() > 0)
-        toot += ",\n1 part " + get_ingredient(vegetables);
+        toot += ", \n1 part " + get_ingredient(vegetables);
     if (dice() > 1)
-        toot += ",\n1 part " + get_ingredient(vegetables);
+        toot += ", \n1 part " + get_ingredient(vegetables);
     if (dice() > 2)
-        toot += ",\n1 part " + get_ingredient(vegetables);
+        toot += ", \n1 part " + get_ingredient(vegetables);
 
     if (dice() > 1)
-        toot += ",\na few " + get_ingredient(fruits);
+        toot += ", \na few " + get_ingredient(fruits);
 
     if (dice() > 1)
-        toot += ",\na good handful " + get_ingredient(misc);
+        toot += ", \na good handful " + get_ingredient(misc);
     if (dice() > 1)
-        toot += ",\na good handful " + get_ingredient(misc);
+        toot += ", \na good handful " + get_ingredient(misc);
 
-    toot += ",\n" + get_ingredient(spices);
+    toot += ", \n" + get_ingredient(spices);
     if (dice() > 0)
-        toot += ",\n" + get_ingredient(spices);
+        toot += ", \n" + get_ingredient(spices);
     if (dice() > 1)
-        toot += ",\n" + get_ingredient(spices);
+        toot += ", \n" + get_ingredient(spices);
     if (dice() > 1)
-        toot += ",\n" + get_ingredient(spices);
+        toot += ", \n" + get_ingredient(spices);
     if (dice() > 2)
-        toot += ",\n" + get_ingredient(spices);
+        toot += ", \n" + get_ingredient(spices);
 
-    toot += ",\nan ample amount of " + get_ingredient(highprio);
+    toot += ", \nan ample amount of " + get_ingredient(highprio);
     if (dice() > 1)
         toot += " and " + get_ingredient(highprio);
 
-    toot += ",\nand plenty oil. Salt to taste.\n\nHappy cooking! 🍲\n\n#bot";
+    toot += ", \nand plenty oil. Salt to taste.\n\nHappy cooking! 🍲\n\n#bot";
 
 
     string answer;
