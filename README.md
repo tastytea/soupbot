@@ -37,17 +37,11 @@ You will need a pre-generated authentication code.
 
 ## Error codes
 
+Same as [mastodon-cpp](https://github.com/tastytea/mastodon-cpp/blob/master/README.md#error-codes), plus:
+
 |      Code | Explanation                   |
 | --------: |:------------------------------|
-|         0 | No error                      |
-|         1 | Invalid call                  |
-|         2 | Not implemented               |
-|        16 | Connection failed             |
-|        17 | TLS error                     |
-|        18 | Invalid response from server  |
-|        32 | File not readable             |
-| 100 - 999 | HTTP status codes             |
-|     65535 | Unknown exception             |
+|         1 | File not readable             |
 
 If you use a debug build, you get more verbose error messages.
 

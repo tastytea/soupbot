@@ -117,7 +117,7 @@ int main(int argc, char *argv[])
     {
         // most likely file not found
         std::cerr << "ERROR: " << filepath << "ingredients.json not found or not readable.\n";
-        return 32;
+        return 1;
     }
 
     populate_vector(ingredients, "vegetables", vegetables);
