@@ -165,7 +165,7 @@ int main(int argc, char *argv[])
     if (dice() > 1)
         toot += " and " + get_ingredient(highprio);
 
-    toot += ", \nand plenty oil. Salt to taste.\n\nHappy cooking! 🍲\n\n#bot";
+    toot += ", \nand plenty oil. Salt to taste. \n\nHappy cooking! 🍲 \n\n#bot";
 
 
     string answer;
