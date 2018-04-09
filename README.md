@@ -8,7 +8,7 @@
  * C++ compiler (tested: gcc 6.4)
  * [cmake](https://cmake.org/) (tested: 3.9.6)
  * [boost](http://www.boost.org/) (tested: 1.63.0)
- * [mastodon-cpp](https://github.com/tastytea/mastodon-cpp) (at least: 0.1.5)
+ * [mastodon-cpp](https://github.com/tastytea/mastodon-cpp) (at least: 0.8.6)
 
 ## Get sourcecode
 

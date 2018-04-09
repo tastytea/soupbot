@@ -21,7 +21,7 @@
 #include <cstdlib>
 #include <random>
 #include <chrono>
-#include <mastodon-cpp.hpp>
+#include <mastodon-cpp/mastodon-cpp.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/filesystem.hpp>
