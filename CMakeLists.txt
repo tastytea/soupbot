@@ -17,3 +17,6 @@ include_directories(${PROJECT_BINARY_DIR})
 add_executable(soupbot src/soupbot.cpp)
 target_link_libraries(soupbot mastodon-cpp boost_system boost_filesystem ssl crypto)
 install(TARGETS soupbot DESTINATION ${CMAKE_INSTALL_BINDIR})
+
+install(FILES ingredients.json
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/soupbot)
