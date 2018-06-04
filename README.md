@@ -8,13 +8,13 @@
  * C++ compiler (tested: gcc 6.4)
  * [cmake](https://cmake.org/) (tested: 3.9.6)
  * [boost](http://www.boost.org/) (tested: 1.63.0)
- * [mastodon-cpp](https://git.schlomp.space/tastytea/mastodon-cpp) (at least: 0.8.6)
+ * [mastodon-cpp](https://schlomp.space/tastytea/mastodon-cpp) (at least: 0.8.6)
 
 ## Get sourcecode
 
 ### Development version
 
-    git clone https://git.schlomp.space/tastytea/soupbot.git
+    git clone https://schlomp.space/tastytea/soupbot.git
 
 ## Compile
 
@@ -37,7 +37,7 @@ You will need a pre-generated authentication code.
 
 ## Error codes
 
-Same as [mastodon-cpp](https://git.schlomp.space/tastytea/mastodon-cpp/src/branch/master/README.md#error-codes), plus:
+Same as [mastodon-cpp](https://schlomp.space/tastytea/mastodon-cpp/src/branch/master/README.md#error-codes), plus:
 
 |      Code | Explanation                   |
 | --------: |:------------------------------|
