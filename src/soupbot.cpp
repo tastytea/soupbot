@@ -131,7 +131,7 @@ int main(int argc, char *argv[])
     std::uniform_int_distribution<std::uint8_t> distribution(0, 3);
     auto dice = std::bind(distribution, generator);
 
-    string toot = "Todays #soup is made of:\n\n";
+    string toot = "Todays soup is made of:\n\n";
 
     toot += "1 part " + get_ingredient(vegetables);
     if (dice() > 0)
