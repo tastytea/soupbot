@@ -28,7 +28,8 @@
 #include "version.hpp"
 
 namespace pt = boost::property_tree;
-using Mastodon::API;
+using namespace Mastodon;
+
 using std::cout;
 using std::string;
 
@@ -95,7 +96,7 @@ string get_ingredient(std::vector<string> &vector)
     return ingredient;
 }
 
-int main(int argc, char *argv[])
+int main()
 {
     pt::ptree config;
     string instance = "";
@@ -167,27 +168,25 @@ int main(int argc, char *argv[])
 
     toot += ", \nand plenty oil. Salt to taste. \n\nHappy cooking! 🍲 \n\n#bot";
 
-
-    string answer;
-    std::uint16_t ret;
-    Mastodon::API masto(instance, access_token);
+    return_call ret;
+    API masto(instance, access_token);
     masto.set_useragent("soupbot/" + (string)global::version);
 
-    API::parametermap parameters =
+    parameters params =
     {
         { "status", { toot } },
         { "visibility", { "public" } }
     };
-    ret = masto.post(API::v1::statuses, parameters, answer);
+    ret = masto.post(API::v1::statuses, params);
 
-    if (ret == 0)
+    if (ret)
     {
-        cout << answer << '\n';
+        cout << ret.answer << '\n';
     }
     else
     {
-        std::cerr << "Error code: " << ret << '\n';
-        return ret;
+        std::cerr << "Error code: " << ret.error_code << '\n';
+        return ret.error_code;
     }
 
     return 0;
