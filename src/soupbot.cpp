@@ -21,6 +21,8 @@
 #include <cstdlib>
 #include <random>
 #include <chrono>
+#include <algorithm>
+#include <iterator>
 #include <mastodon-cpp/mastodon-cpp.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
@@ -73,12 +75,13 @@ void read_config(pt::ptree &config, string &instance, string &access_token)
     }
 }
 
-void populate_vector(const pt::ptree &ingredients, const string &node, std::vector<string> &vector)
+void populate_vector(const pt::ptree &ingredients, const string &node,
+                     std::vector<string> &vector)
 {
-    for (const pt::ptree::value_type &value : ingredients.get_child(node))
-    {
-        vector.push_back(value.second.data());
-    }
+    const pt::ptree childs = ingredients.get_child(node);
+    std::transform(childs.begin(), childs.end(), std::back_inserter(vector),
+                   [](const pt::ptree::value_type &value)
+                   { return value.second.data(); });
 }
 
 string get_ingredient(std::vector<string> &vector)
