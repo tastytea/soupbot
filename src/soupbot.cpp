@@ -1,5 +1,5 @@
 /*  This file is part of soupbot.
- *  Copyright © 2018, 2019 tastytea <tastytea@tastytea.de>
+ *  Copyright © 2018, 2019, 2020 tastytea <tastytea@tastytea.de>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -14,23 +14,23 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <iostream>
-#include <vector>
-#include <string>
+#include "version.hpp"
+#include <algorithm>
+#include <boost/filesystem.hpp>
+#include <boost/property_tree/json_parser.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include <chrono>
 #include <cstdint>
 #include <cstdlib>
-#include <random>
-#include <chrono>
-#include <algorithm>
+#include <iostream>
 #include <iterator>
-#include <mastodon-cpp/mastodon-cpp.hpp>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/json_parser.hpp>
-#include <boost/filesystem.hpp>
-#include "version.hpp"
+#include <mastodonpp/mastodonpp.hpp>
+#include <random>
+#include <string>
+#include <vector>
 
 namespace pt = boost::property_tree;
-using namespace Mastodon;
+namespace masto = mastodonpp;
 
 using std::cout;
 using std::string;
@@ -42,7 +42,8 @@ void read_config(pt::ptree &config, string &instance, string &access_token)
     bool config_changed = false;
 
     // Read config file, get access token
-    try {
+    try
+    {
         pt::read_json(filepath + "config.json", config);
         instance = config.get("instance", "");
         access_token = config.get("access_token", "");
@@ -79,9 +80,9 @@ void populate_vector(const pt::ptree &ingredients, const string &node,
                      std::vector<string> &vector)
 {
     const pt::ptree childs = ingredients.get_child(node);
-    std::transform(childs.begin(), childs.end(), std::back_inserter(vector),
-                   [](const pt::ptree::value_type &value)
-                   { return value.second.data(); });
+    std::transform(
+        childs.begin(), childs.end(), std::back_inserter(vector),
+        [](const pt::ptree::value_type &value) { return value.second.data(); });
 }
 
 string get_ingredient(std::vector<string> &vector)
@@ -91,7 +92,8 @@ string get_ingredient(std::vector<string> &vector)
 
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
     std::default_random_engine generator(seed);
-    std::uniform_int_distribution<std::uint16_t> distribution(0, vector.size() - 1);
+    std::uniform_int_distribution<std::uint16_t> distribution(0, vector.size()
+                                                                     - 1);
     const std::uint16_t i = distribution(generator);
     const string ingredient = vector.at(i);
 
@@ -120,7 +122,8 @@ int main()
     catch (std::exception &e)
     {
         // most likely file not found
-        std::cerr << "ERROR: " << filepath << "ingredients.json not found or not readable.\n";
+        std::cerr << "ERROR: " << filepath
+                  << "ingredients.json not found or not readable.\n";
         return 1;
     }
 
@@ -171,25 +174,22 @@ int main()
 
     toot += ", \nand plenty oil. Salt to taste. \n\nHappy cooking! 🍲 \n\n#bot";
 
-    return_call ret;
-    API masto(instance, access_token);
-    masto.set_useragent("soupbot/" + (string)global::version);
+    masto::Instance server{instance, access_token};
+    server.set_useragent("soupbot/" + (string)global::version);
+    masto::Connection connection{server};
 
-    parameters params =
-    {
-        { "status", { toot } },
-        { "visibility", { "public" } }
-    };
-    ret = masto.post(API::v1::statuses, params);
+    masto::parametermap params = {{"status", {toot}},
+                                  {"visibility", {"public"}}};
+    auto ret{connection.post(masto::API::v1::statuses, params)};
 
     if (ret)
     {
-        cout << ret.answer << '\n';
+        cout << ret.body << '\n';
     }
     else
     {
-        std::cerr << "Error code: " << ret.error_code << '\n';
-        return ret.error_code;
+        std::cerr << "Error code: " << ret.curl_error_code << '\n';
+        return ret.curl_error_code;
     }
 
     return 0;
